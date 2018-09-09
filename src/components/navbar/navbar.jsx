@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Typography, Button, withStyles } from '@material-ui/core';
 
 const styles = theme => ({
@@ -17,11 +18,14 @@ const Navbar = ({ classes }) => (
           <Typography variant="title" color="inherit" className={classes.flex}>
             News
           </Typography>
-          <Button color="inherit">Find job</Button>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">SIGN IN</Button>
         </Toolbar>
       </AppBar>
     </div>
 );
+
+Navbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
 
 export default withStyles(styles)(Navbar);

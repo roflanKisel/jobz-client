@@ -7,12 +7,13 @@ module.exports = {
     jest: true,
   },
   rules: {
-    'react/prop-types': 0,
+    'react/prop-types': false,
     'react/require-default-props' : false,
-    'react/jsx-filename-extension': 0,
-    'import/prefer-default-export': 'off',
-    'jsx-a11y/click-events-have-key-events': 'off',
-    'jsx-a11y/no-static-element-interactions': 'off',
+    'react/jsx-filename-extension': false,
+    'import/prefer-default-export': false,
+    'jsx-a11y/click-events-have-key-events': false,
+    'jsx-a11y/no-static-element-interactions': false,
+    'react/forbid-prop-types': false,
     quotes: ['error', 'single'],
   },
 };
