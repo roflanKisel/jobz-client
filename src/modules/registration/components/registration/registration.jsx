@@ -53,7 +53,7 @@ class Registration extends PureComponent {
       <Grid container justify="center">
         <Grid xs={10} sm={10} md={7} lg={5} item>
           <Paper className={classes.papers}>
-            <Typography variant="headline">Registration</Typography>
+            <Typography variant="headline">SIGN UP</Typography>
             <InputArea
               className={classes.textFields}
               fullName={fullName}
@@ -70,7 +70,7 @@ class Registration extends PureComponent {
               onBirthdayChange={this.handleInputChange('birthday')}
             />
           </Paper>
-          <StepButtonsPaper classes={classes} backLink="/" nextLink="/" />
+          <StepButtonsPaper className={classes.papers} backLink="/" nextLink="/" />
         </Grid>
       </Grid>
     );
