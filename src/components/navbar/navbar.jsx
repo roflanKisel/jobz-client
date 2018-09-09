@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, withStyles } from '@material-ui/core';
 
 const styles = theme => ({
@@ -18,7 +19,7 @@ const Navbar = ({ classes }) => (
           <Typography variant="title" color="inherit" className={classes.flex}>
             News
           </Typography>
-          <Button color="inherit">SIGN IN</Button>
+          <Button color="inherit" component={Link} to="/signin">SIGN IN</Button>
         </Toolbar>
       </AppBar>
     </div>

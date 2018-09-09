@@ -1,13 +1,15 @@
 import React from 'react';
+import { ConnectedRouter } from 'connected-react-router';
 import Navbar from '../navbar/navbar';
-import Login from '../../modules/login/components/login/login';
-import Registration from '../../modules/registration/components/registration/registration';
+import routes from '../../routes';
 
-const App = () => (
-  <div className="app">
-    <Navbar />
-    <Login />
-  </div>
+const App = ({ history }) => (
+  <ConnectedRouter history={history}>
+    <div className="app">
+      <Navbar />
+      {routes}
+    </div>
+  </ConnectedRouter>
 );
 
 export default App;
