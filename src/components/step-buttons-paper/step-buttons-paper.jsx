@@ -6,11 +6,11 @@ import { Paper, Button, Grid } from '@material-ui/core';
 
 const StepButtonsPaper = ({ className = '', backLink, nextLink }) => (
   <Paper className={className}>
-    <Grid container justify="space-between">
-      <Button variant="contained" color="secondary" component={Link} to={backLink}>
+    <Grid container justify="space-between" className="button-container">
+      <Button className="back-button" variant="contained" color="secondary" component={Link} to={backLink}>
         BACK
       </Button>
-      <Button variant="contained" color="primary" disabled component={Link} to={nextLink}>
+      <Button className="next-button" variant="contained" color="primary" disabled component={Link} to={nextLink}>
         NEXT
       </Button>
     </Grid>

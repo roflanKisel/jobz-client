@@ -14,15 +14,15 @@ const styles = theme => ({
 
 const Navbar = ({ classes }) => (
   <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            News
-          </Typography>
-          <Button color="inherit" component={Link} to="/signin">SIGN IN</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="title" color="inherit" className={classes.flex}>
+          News
+        </Typography>
+        <Button color="inherit" component={Link} to="/signin">SIGN IN</Button>
+      </Toolbar>
+    </AppBar>
+  </div>
 );
 
 Navbar.propTypes = {
