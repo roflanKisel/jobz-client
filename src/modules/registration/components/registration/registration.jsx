@@ -8,7 +8,8 @@ import InputArea from '../input-area/input-area';
 const styles = theme => ({
   papers: {
     padding: 20,
-    marginTop: 20,
+    marginTop: 15,
+    marginBottom: 10,
   },
   textFields: {
     width: '100%',

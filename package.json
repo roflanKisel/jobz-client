@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest -u",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open"
   },
   "jest": {
-    "setupFiles": ["./test/jestsetup.js"],
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "setupFiles": [
+      "./test/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "repository": {
     "type": "git",
@@ -82,6 +85,6 @@
     "url-loader": "^1.0.1",
     "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.1.8"
   }
 }

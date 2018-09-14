@@ -7,7 +7,8 @@ import StepButtonsPaper from '../../../../components/step-buttons-paper/step-but
 const styles = theme => ({
   papers: {
     padding: 20,
-    marginTop: 20,
+    marginTop: 15,
+    marginBottom: 10,
   },
   textFields: {
     marginTop: 15,
@@ -35,7 +36,7 @@ class Login extends PureComponent {
               <TextField className={classes.textFields} type="password" label="Password" />
             </Grid>
             <Grid item xs={12} container justify="center">
-              <Button className={classes.registerButton} variant="flat" component={Link} to="/signup">{'Don\'t have account yet? Sign up!'}</Button>
+              <Button className={classes.registerButton} variant="flat" component={Link} to="/signup">Create account</Button>
             </Grid>
           </Paper>
           <StepButtonsPaper className={classes.papers} backLink="/" nextLink="/" />

@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -56,7 +57,7 @@ module.exports = {
       },
 
       {
-        test: /\.(jpg|png|gif|svg|ico|woff|woff2)$/,
+        test: /\.(jpg|png|gif|svg|ico)$/,
         use: [
           {
             loader: 'file-loader',
@@ -68,7 +69,7 @@ module.exports = {
       },
 
       {
-        test: /\.(eot|woff|ttf)$/,
+        test: /\.(eot|woff|ttf|woff2)$/,
         use: [
           {
             loader: 'file-loader',
@@ -82,8 +83,9 @@ module.exports = {
   },
 
   devServer: {
-    hot:true,
+    hot: true,
     historyApiFallback: true,
+    host: '0.0.0.0',
   },
 
   resolve: {
@@ -94,5 +96,9 @@ module.exports = {
   resolveLoader: {
     modules: ['node_modules'],
     extensions: ['.js', '.jsx'],
+  },
+
+  watchOptions: {
+    ignored: path.resolve(__dirname, 'node_modules'),
   },
 };
