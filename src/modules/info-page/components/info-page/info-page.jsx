@@ -19,7 +19,7 @@ const styles = theme => ({
 
 const InfoPage = ({ classes }) => (
   <Grid container justify="center">
-    <Grid className={classes.root} xs={11} md={6} lg={5} item>
+    <Grid className={classes.root} item xs={11} md={6} lg={5}>
       <Paper className={classes.paper}>
         <Typography variant="title">Our amazing team</Typography>
         <Typography gutterBottom variant="caption">We are awesome</Typography>

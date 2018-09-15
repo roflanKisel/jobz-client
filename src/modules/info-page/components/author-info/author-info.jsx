@@ -18,7 +18,7 @@ const styles = theme => ({
 });
 
 const AuthorInfo = ({ classes, avatar = '', header = '', description = '' }) => (
-  <Grid className={classes.root} container xs={12} justify="center" alignItems="center">
+  <Grid className={classes.root} container justify="center" alignItems="center">
     <Grid item xs={3} sm={1}>
       <Avatar className={classes.bigAvatar} alt="Kaneki Ken Old" src={avatar} />
     </Grid>
