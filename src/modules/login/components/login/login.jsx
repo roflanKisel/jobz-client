@@ -23,8 +23,36 @@ const styles = theme => ({
 
 
 class Login extends PureComponent {
+  state = {
+    email: '',
+    password: '',
+  }
+  
+  onChangeEmail = event => {
+    this.setState({
+      email: event.target.value,
+    });
+  }
+
+  onChangePassword = event => {
+    this.setState({
+      password: event.target.value,
+    });
+  }
+
+  onSendData = event => {
+    const { dispatchSignIn } = this.props;
+    const { email, password } = this.state;
+
+    dispatchSignIn({
+      email,
+      password,
+    });
+  }
+
   render() {
     const { classes } = this.props;
+    const { email, password } = this.state;
 
     return (
       <Grid container justify="center">
@@ -32,14 +60,14 @@ class Login extends PureComponent {
           <Paper className={classes.papers}>
             <Typography variant="headline">SIGN IN</Typography>
             <Grid item container xs={12}>
-              <TextField className={classes.textFields} type="email" label="E-mail" />
-              <TextField className={classes.textFields} type="password" label="Password" />
+              <TextField className={classes.textFields} value={email} onChange={this.onChangeEmail} type="email" label="E-mail" />
+              <TextField className={classes.textFields} value={password} onChange={this.onChangePassword} type="password" label="Password" />
             </Grid>
             <Grid item xs={12} container justify="center">
               <Button className={classes.registerButton} variant="flat" component={Link} to="/signup">Create account</Button>
             </Grid>
           </Paper>
-          <StepButtonsPaper className={classes.papers} backLink="/" nextLink="/" />
+          <StepButtonsPaper className={classes.papers} backLink="/" nextLink="/" onNextClick={this.onSendData}/>
         </Grid>
       </Grid>
     )

@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Button, Paper, Grid, withStyles, Typography } from '@material-ui/core';
 import TextField from '../../../../components/text-field/text-field';
 import StepButtonsPaper from '../../../../components/step-buttons-paper/step-buttons-paper';
-import PhoneTextMask from '../../../../components/phone-text-mask/phone-text-mask';
 
 const styles = theme => ({
   root: {},
@@ -31,6 +30,7 @@ class CreateCompanyForm extends PureComponent {
     companyName: '',
     address: '',
     phoneNumber: '',
+    description: '',
     companyNameError: false,
   };
 
@@ -52,9 +52,15 @@ class CreateCompanyForm extends PureComponent {
     });
   }
 
+  onChangeDescription = event => {
+    this.setState({
+      description: event.target.value,
+    });
+  }
+
   render() {
     const { classes } = this.props;
-    const { companyName, address, phoneNumber, companyNameError } = this.state;
+    const { companyName, address, phoneNumber, description, companyNameError } = this.state;
 
     return (
       <Grid className={classes.root} container justify="center">
@@ -85,7 +91,7 @@ class CreateCompanyForm extends PureComponent {
               />
             </Grid>
             <Grid container>
-              <TextField className={classes.textArea} multiline rows={5} rowsMax={5} label="Description" />
+              <TextField className={classes.textArea} value={description} onChange={this.onChangeDescription} multiline rows={5} rowsMax={5} label="Description" />
             </Grid>
             <Button variant="contained" color="primary">
               Upload image

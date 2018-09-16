@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Paper, Typography, withStyles } from '@material-ui/core';
-import TextField from '../../../../components/text-field/text-field';
 import StepButtonsPaper from '../../../../components/step-buttons-paper/step-buttons-paper';
 import InputArea from '../input-area/input-area';
 
@@ -27,7 +26,7 @@ class Registration extends PureComponent {
   };
 
   state = {
-    fullName: '',
+    name: '',
     email: '',
     password: '',
     confirmedPassword: '',
@@ -40,9 +39,21 @@ class Registration extends PureComponent {
     });
   };
 
+  onSendData = event => {
+    const { dispatchRegistrationRequest } = this.props;
+    const { email, password, name, birthday } = this.state;
+    
+    dispatchRegistrationRequest({
+      email,
+      password,
+      name,
+      birthday,
+    });
+  }
+
   render() {
     const {
-      fullName,
+      name,
       email,
       password,
       confirmedPassword,
@@ -57,12 +68,12 @@ class Registration extends PureComponent {
             <Typography variant="headline">SIGN UP</Typography>
             <InputArea
               className={classes.textFields}
-              fullName={fullName}
+              fullName={name}
               email={email}
               password={password}
               confirmedPassword={confirmedPassword}
               birthday={birthday}
-              onFullNameChange={this.handleInputChange('fullName')}
+              onFullNameChange={this.handleInputChange('name')}
               onEmailChange={this.handleInputChange('email')}
               onPasswordChange={this.handleInputChange('password')}
               onConfirmedPasswordChange={this.handleInputChange(
@@ -71,7 +82,7 @@ class Registration extends PureComponent {
               onBirthdayChange={this.handleInputChange('birthday')}
             />
           </Paper>
-          <StepButtonsPaper className={classes.papers} backLink="/" nextLink="/" />
+          <StepButtonsPaper className={classes.papers} backLink="/" nextLink="/" onNextClick={this.onSendData}/>
         </Grid>
       </Grid>
     );
