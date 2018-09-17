@@ -4,6 +4,9 @@ import {
   REGISTRATION_DATA_SUCCESS,
   REGISTRATION_DATA_FAILURE,
 } from '../constants/registration';
+import {
+  LOGIN_SIGN_IN_SUCCESS,
+} from '../../login/constants/login';
 import { setToken } from '../../../services/user-storage';
 
 const registrationRequest = data => dispatch => {
@@ -17,6 +20,7 @@ const registrationRequest = data => dispatch => {
         token: response.data.token,
       });
       dispatch({ type: REGISTRATION_DATA_SUCCESS });
+      dispatch({ type: LOGIN_SIGN_IN_SUCCESS, payload: response.data.user });
     })
     .catch(err => {
       dispatch({ type: REGISTRATION_DATA_FAILURE });

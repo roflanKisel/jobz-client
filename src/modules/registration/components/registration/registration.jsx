@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Paper, Typography, withStyles } from '@material-ui/core';
-import StepButtonsPaper from '../../../../components/step-buttons-paper/step-buttons-paper';
+import { Grid, Paper, Typography, withStyles, Button, LinearProgress } from '@material-ui/core';
+import { Link, Redirect } from 'react-router-dom';
 import InputArea from '../input-area/input-area';
 
 const styles = theme => ({
@@ -17,6 +17,9 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       width: '49%',
     },
+  },
+  progress: {
+    width: '100%',
   },
 });
 
@@ -42,24 +45,18 @@ class Registration extends PureComponent {
   onSendData = event => {
     const { dispatchRegistrationRequest } = this.props;
     const { email, password, name, birthday } = this.state;
-    
+
     dispatchRegistrationRequest({
       email,
       password,
       name,
       birthday,
     });
-  }
+  };
 
   render() {
-    const {
-      name,
-      email,
-      password,
-      confirmedPassword,
-      birthday,
-    } = this.state;
-    const { classes } = this.props;
+    const { name, email, password, confirmedPassword, birthday } = this.state;
+    const { classes, isLoading, isSuccess } = this.props;
 
     return (
       <Grid container justify="center">
@@ -82,7 +79,42 @@ class Registration extends PureComponent {
               onBirthdayChange={this.handleInputChange('birthday')}
             />
           </Paper>
-          <StepButtonsPaper className={classes.papers} backLink="/" nextLink="/" onNextClick={this.onSendData}/>
+          <Paper className={classes.papers}>
+            {isLoading && <LinearProgress className={classes.progress} />}
+            {(!isLoading && isSuccess) && <Redirect to="/" />}
+            <Grid
+              container
+              justify="space-between"
+              className="button-container"
+            >
+              <Button
+                className="back-button"
+                variant="contained"
+                color="secondary"
+                component={Link}
+                to="/"
+              >
+                BACK
+              </Button>
+              <Button
+                className="next-button"
+                variant="contained"
+                color="primary"
+                onClick={this.onSendData}
+                disabled={
+                  !(
+                    name &&
+                    email &&
+                    password &&
+                    birthday &&
+                    password === confirmedPassword
+                  )
+                }
+              >
+                Register
+              </Button>
+            </Grid>
+          </Paper>
         </Grid>
       </Grid>
     );

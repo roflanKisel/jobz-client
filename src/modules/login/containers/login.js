@@ -4,6 +4,7 @@ import Login from '../components/login/login';
 import { signIn, signOut } from '../actions/login';
 
 const mapStateToProps = state => ({
+  isLoading: state.user.isLoading,
   isLoggedIn: state.user.isLoggedIn,
   userData: state.user.userData,
 });

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { CssBaseline } from '@material-ui/core';
 import store from './helpers/store';
 import history from './helpers/history';
-import App from './components/app/app';
+import App from './containers/app';
 
 import 'typeface-roboto';
 

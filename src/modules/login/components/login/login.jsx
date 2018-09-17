@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { withStyles, Grid, Paper, Typography, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { withStyles, Grid, Paper, Typography, Button, LinearProgress } from '@material-ui/core';
+import { Link, Redirect } from 'react-router-dom';
 import TextField from '../../../../components/text-field/text-field';
-import StepButtonsPaper from '../../../../components/step-buttons-paper/step-buttons-paper';
 
 const styles = theme => ({
   papers: {
@@ -17,6 +16,9 @@ const styles = theme => ({
   },
   registerButton: {
     marginTop: 5,
+    width: '100%',
+  },
+  progress: {
     width: '100%',
   },
 });
@@ -51,7 +53,7 @@ class Login extends PureComponent {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, isLoading, isLoggedIn } = this.props;
     const { email, password } = this.state;
 
     return (
@@ -67,7 +69,18 @@ class Login extends PureComponent {
               <Button className={classes.registerButton} variant="flat" component={Link} to="/signup">Create account</Button>
             </Grid>
           </Paper>
-          <StepButtonsPaper className={classes.papers} backLink="/" nextLink="/" onNextClick={this.onSendData}/>
+          <Paper className={classes.papers}>
+            {isLoading && <LinearProgress className={classes.progress} />}
+            {(!isLoading && isLoggedIn) && <Redirect to="/" />}
+            <Grid container justify="space-between" className="button-container">
+              <Button className="back-button" variant="contained" color="secondary" component={Link} to="/">
+                HOME
+              </Button>
+              <Button className="next-button" variant="contained" color="primary" onClick={this.onSendData}>
+                SIGN IN
+              </Button>
+            </Grid>
+          </Paper>
         </Grid>
       </Grid>
     )

@@ -2,8 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import { ConnectedRouter } from 'connected-react-router';
 import PropTypes from 'prop-types';
+import { lifecycle } from 'recompose';
 import { withStyles } from '@material-ui/core';
-import Navbar from '../navbar/navbar';
+import Navbar from '../../containers/navbar';
 import routes from '../../routes';
 
 const styles = {
@@ -25,4 +26,10 @@ App.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(App);
+export default lifecycle({
+  componentDidMount() {
+    const { dispatchGetUserData } = this.props;
+
+    dispatchGetUserData();
+  }
+})(withStyles(styles)(App));
