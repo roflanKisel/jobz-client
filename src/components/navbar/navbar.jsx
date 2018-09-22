@@ -15,7 +15,7 @@ const styles = theme => ({
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
+    marginRight: 12,
   },
 });
 
@@ -43,7 +43,7 @@ class Navbar extends Component {
   }
 
   render() {
-    const { classes, isLoggedIn, userData } = this.props;
+    const { classes, isLoggedIn, userData, title } = this.props;
     const { isSideDrawerOpen } = this.state;
 
     return (
@@ -54,12 +54,12 @@ class Navbar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              News
+              {title}
             </Typography>
             {!isLoggedIn && <Button color="inherit" component={Link} to="/signin">SIGN IN</Button>}
             {isLoggedIn && 
               <React.Fragment>
-                <UserNavMenu username={userData.name[0]} />
+                <UserNavMenu className={classes.userArea} username={userData.name[0]} />
               </React.Fragment>
             }
           </Toolbar>
@@ -78,6 +78,9 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   classes: PropTypes.object.isRequired,
-}
+  isLoggedIn: PropTypes.bool.isRequired,
+  userData: PropTypes.object,
+  title: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(Navbar);

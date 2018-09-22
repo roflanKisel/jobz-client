@@ -5,7 +5,7 @@ import {
   Grid,
   Typography,
   withStyles,
-  LinearProgress
+  LinearProgress,
 } from '@material-ui/core';
 import CommonCard from '../common-card/common-card';
 
@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   progress: {
     width: '100%',
-  }
+  },
 });
 
 const HomePage = ({ classes, companies, vacancies, isLoading }) => (
@@ -73,10 +73,15 @@ const enhancedHomePage = withStyles(styles)(HomePage);
 export default compose(
   lifecycle({
     componentDidMount() {
-      const { dispatchGetCompanies, dispatchGetVacancies } = this.props;
+      const {
+        dispatchGetCompanies,
+        dispatchGetVacancies,
+        dispatchSetTitle,
+      } = this.props;
 
       dispatchGetCompanies();
       dispatchGetVacancies();
+      dispatchSetTitle('Home');
     },
   }),
   onlyUpdateForKeys(['companies', 'vacancies', 'isLoading'])

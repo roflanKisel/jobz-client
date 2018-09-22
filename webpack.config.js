@@ -10,9 +10,8 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: `${__dirname}/dist`,
-    filename: 'bundle.js',
+    filename: './bundle.js',
   },
-
   plugins: [
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',

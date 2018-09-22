@@ -7,12 +7,13 @@ import {
   LOGIN_SIGN_OUT_SUCCESS,
 } from '../constants/login';
 import { setToken, removeToken } from '../../../services/user-storage';
+import { API_URL } from '../../../constants/config';
 
 
 const signIn = data => dispatch => {
   dispatch({ type: LOGIN_SIGN_IN_REQUEST });
 
-  axios.post('http://localhost:3000/api/auth/signin', data)
+  axios.post(`${API_URL}/api/auth/signin`, data)
     .then((response) => {
       setToken({
         token: response.data.token,

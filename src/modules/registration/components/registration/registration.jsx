@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Paper, Typography, withStyles, Button, LinearProgress } from '@material-ui/core';
+import { Grid, Paper, Typography, withStyles, Button, CircularProgress } from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
 import InputArea from '../input-area/input-area';
 
@@ -19,7 +19,7 @@ const styles = theme => ({
     },
   },
   progress: {
-    width: '100%',
+    width: 'auto',
   },
 });
 
@@ -36,13 +36,19 @@ class Registration extends PureComponent {
     birthday: '1999-06-20',
   };
 
+  componentDidMount() {
+    const { dispatchSetTitle } = this.props;
+
+    dispatchSetTitle('Sign Up')
+  }
+
   handleInputChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
   };
 
-  onSendData = event => {
+  onSendData = () => {
     const { dispatchRegistrationRequest } = this.props;
     const { email, password, name, birthday } = this.state;
 
@@ -80,7 +86,6 @@ class Registration extends PureComponent {
             />
           </Paper>
           <Paper className={classes.papers}>
-            {isLoading && <LinearProgress className={classes.progress} />}
             {(!isLoading && isSuccess) && <Redirect to="/" />}
             <Grid
               container
@@ -94,8 +99,9 @@ class Registration extends PureComponent {
                 component={Link}
                 to="/"
               >
-                BACK
+                HOME
               </Button>
+              {isLoading && <CircularProgress className={classes.progress} />}
               <Button
                 className="next-button"
                 variant="contained"

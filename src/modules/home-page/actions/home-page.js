@@ -6,6 +6,7 @@ import {
   HOME_VACANCIES_DATA_SUCCESS,
   HOME_VACANCIES_DATA_FAILURE,
 } from '../constants/home-page';
+import { NAVBAR_TITLE_SET } from '../../../constants/navbar';
 
 const companiesData = [
   {

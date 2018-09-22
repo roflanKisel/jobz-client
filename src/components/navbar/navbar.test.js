@@ -6,7 +6,7 @@ import Navbar from './navbar';
 describe('Navbar', () => {
   it('should render without errors', () => {
     const wrapper = shallow(
-      <Navbar />
+      <Navbar isLoggedIn title="navbar" />
     );
     expect(wrapper).toMatchSnapshot();
   });

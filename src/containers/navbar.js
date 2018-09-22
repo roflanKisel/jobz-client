@@ -6,6 +6,7 @@ import Navbar from '../components/navbar/navbar';
 const mapStateToProps = state => ({
   userData: state.user.userData,
   isLoggedIn: state.user.isLoggedIn,
+  title: state.navbar.title,
 });
 
 const mapDispatchToProps = dispatch => ({

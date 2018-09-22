@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import PrivateRoute from '../containers/private-route';
 import Login from '../modules/login/containers/login';
 import Registration from '../modules/registration/containers/registration';
 import HomePage from '../modules/home-page/containers/home-page';
-import InfoPage from '../modules/info-page/components/info-page/info-page';
+import InfoPage from '../modules/info-page/containers/info-page';
 import Companies from '../modules/companies/components/companies/companies';
 
 const routes = (
@@ -12,7 +13,7 @@ const routes = (
     <Route path="/signin" component={Login} />
     <Route path="/signup" component={Registration} />
     <Route path="/about" component={InfoPage} />
-    <Route path="/companies/:action" component={Companies} />
+    <PrivateRoute path="/companies/:action" component={Companies} redirectPath="/" />
   </Switch>
 );
 

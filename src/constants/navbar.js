@@ -1,0 +1,5 @@
+const NAVBAR_TITLE_SET = 'NAVBAR_TITLE_SET';
+
+export {
+  NAVBAR_TITLE_SET,
+};

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Paper, Grid, withStyles, Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { lifecycle } from 'recompose';
 import AuthorInfo from '../author-info/author-info';
-import designerAvatar from '../../../../../public/dev-1.jpg';
-import mainDeveloperAvatar from '../../../../../public/dev-2.jpg';
-import ceoAvatar from '../../../../../public/dev-3.jpg';
+import designerAvatar from '../../../../../public/images/dev-1.jpg';
+import mainDeveloperAvatar from '../../../../../public/images/dev-2.jpg';
+import ceoAvatar from '../../../../../public/images/dev-3.jpg';
 
-const styles = theme => ({
+const styles = {
   root: {
     marginTop: 15,
   },
@@ -15,7 +17,7 @@ const styles = theme => ({
     marginBottom: 10,
     padding: 20,
   },
-});
+};
 
 const InfoPage = ({ classes }) => (
   <Grid container justify="center">
@@ -58,4 +60,12 @@ const InfoPage = ({ classes }) => (
   </Grid>
 );
 
-export default withStyles(styles)(InfoPage);
+InfoPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default lifecycle({
+  componentDidMount() {
+    this.props.dispatchSetTitle('About');
+  },
+})(withStyles(styles)(InfoPage));

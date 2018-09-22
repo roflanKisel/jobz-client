@@ -8,12 +8,13 @@ import {
   LOGIN_SIGN_IN_SUCCESS,
 } from '../../login/constants/login';
 import { setToken } from '../../../services/user-storage';
+import { API_URL } from '../../../constants/config';
 
 const registrationRequest = data => dispatch => {
   dispatch({ type: REGISTRATION_DATA_REQUEST });
 
   axios
-    .post('http://localhost:3000/api/auth/signup', data)
+    .post(`${API_URL}/api/auth/signup`, data)
     .then(response => {
       console.log(response.data);
       setToken({
