@@ -18,7 +18,9 @@ const signIn = data => dispatch => {
       setToken({
         token: response.data.token,
       });
-      dispatch({ type: LOGIN_SIGN_IN_SUCCESS, payload: response.data.user });
+      setTimeout(() => {
+        dispatch({ type: LOGIN_SIGN_IN_SUCCESS, payload: response.data.user });
+      }, 2000);
     })
     .catch((err) => {
       dispatch({ type: LOGIN_SIGN_IN_FAILURE });

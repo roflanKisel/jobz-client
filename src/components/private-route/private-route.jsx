@@ -21,7 +21,6 @@ const PrivateRoute = ({
 );
 
 PrivateRoute.propTypes = {
-  component: PropTypes.object.isRequired,
   isAuthenticate: PropTypes.bool.isRequired,
   redirectPath: PropTypes.string.isRequired,
 };

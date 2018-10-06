@@ -5,12 +5,12 @@ import {
   Paper,
   Typography,
   Button,
-  CircularProgress,
+  LinearProgress,
 } from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
 import TextField from '../../../../components/text-field/text-field';
 
-const styles = theme => ({
+const styles = {
   papers: {
     padding: 20,
     marginTop: 15,
@@ -26,9 +26,9 @@ const styles = theme => ({
     width: '100%',
   },
   progress: {
-    width: 'auto',
+    width: '100%',
   },
-});
+};
 
 class Login extends PureComponent {
   state = {
@@ -54,7 +54,7 @@ class Login extends PureComponent {
     });
   };
 
-  onSendData = event => {
+  onSendData = () => {
     const { dispatchSignIn } = this.props;
     const { email, password } = this.state;
 
@@ -70,6 +70,7 @@ class Login extends PureComponent {
 
     return (
       <Grid container justify="center">
+        {isLoading && <LinearProgress className={classes.progress} />}
         <Grid xs={10} sm={7} md={5} lg={3} item>
           <Paper className={classes.papers}>
             <Typography variant="headline">SIGN IN</Typography>
@@ -116,7 +117,6 @@ class Login extends PureComponent {
               >
                 HOME
               </Button>
-              {isLoading && <CircularProgress className={classes.progress} />}
               <Button
                 className="next-button"
                 variant="contained"

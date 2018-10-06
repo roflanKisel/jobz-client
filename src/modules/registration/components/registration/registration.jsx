@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Paper, Typography, withStyles, Button, CircularProgress } from '@material-ui/core';
+import { Grid, Paper, Typography, withStyles, Button, LinearProgress } from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
 import InputArea from '../input-area/input-area';
 
@@ -19,7 +19,7 @@ const styles = theme => ({
     },
   },
   progress: {
-    width: 'auto',
+    width: '100%',
   },
 });
 
@@ -66,6 +66,7 @@ class Registration extends PureComponent {
 
     return (
       <Grid container justify="center">
+        {isLoading && <LinearProgress className={classes.progress} />}
         <Grid xs={10} sm={10} md={7} lg={5} item>
           <Paper className={classes.papers}>
             <Typography variant="headline">SIGN UP</Typography>
@@ -101,7 +102,6 @@ class Registration extends PureComponent {
               >
                 HOME
               </Button>
-              {isLoading && <CircularProgress className={classes.progress} />}
               <Button
                 className="next-button"
                 variant="contained"

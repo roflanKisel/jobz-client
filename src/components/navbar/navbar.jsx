@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, withStyles, IconButton, Avatar } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button, withStyles, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SideDrawer from '../side-drawer/side-drawer';
 import UserNavMenu from '../user-nav-menu/user-nav-menu';
