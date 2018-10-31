@@ -10,6 +10,7 @@ import {
   Hidden,
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Create';
+import { lifecycle } from 'recompose';
 import Tabs from '../tabs/tabs';
 
 const styles = theme => ({
@@ -94,4 +95,12 @@ const Profile = ({ classes, match, userData }) => (
   </React.Fragment>
 );
 
-export default withStyles(styles)(Profile);
+const ProfileWithMounting = lifecycle({
+  componentDidMount() {
+    const { dispatchSetTitle } = this.props;
+
+    dispatchSetTitle('Profile');
+  },
+})(Profile);
+
+export default withStyles(styles)(ProfileWithMounting);

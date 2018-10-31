@@ -1,14 +1,10 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Profile from '../components/profile/profile';
 import { setTitle } from '../../../actions/navbar';
-
-const mapStateToProps = state => ({
-  userData: state.user.userData,
-});
+import CreateVacancyForm from '../components/create-vacancy-form/create-vacancy-form';
 
 const mapDispatchToProps = dispatch => ({
   dispatchSetTitle: bindActionCreators(setTitle, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(null, mapDispatchToProps)(CreateVacancyForm);

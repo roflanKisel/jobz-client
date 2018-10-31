@@ -84,7 +84,8 @@ module.exports = {
   devServer: {
     hot: true,
     historyApiFallback: true,
-    host: '0.0.0.0',
+    // NOTE: uncoment next line to open server on 0.0.0.0
+    // host: '0.0.0.0',
   },
 
   resolve: {

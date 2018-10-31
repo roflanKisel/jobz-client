@@ -34,6 +34,12 @@ class CreateCompanyForm extends PureComponent {
     companyNameError: false,
   };
 
+  componentDidMount() {
+    const { dispatchSetTitle } = this.props;
+
+    dispatchSetTitle('Create company');
+  }
+
   onChangeCompanyName = event => {
     this.setState({
       companyName: event.target.value,

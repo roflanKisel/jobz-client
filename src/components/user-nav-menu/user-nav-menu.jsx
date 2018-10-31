@@ -1,29 +1,29 @@
 import React from 'react';
-import { withHandlers, onlyUpdateForKeys, compose, withState } from 'recompose';
+import { onlyUpdateForKeys, compose } from 'recompose';
 import { Avatar, withStyles } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const styles = {
+  link: {
+    textDecoration: 'none',
+  },
   avatar: {
+    textDecoration: 'none',
     '&:hover': {
       cursor: 'pointer',
     }
   },
-}
+};
 
-const UserNavMenu = ({ classes, username, isClicked, onAvatarClick }) => (
+const UserNavMenu = ({ classes, username, onAvatarClick }) => (
   <React.Fragment>
-    {isClicked && <Redirect to="/profile" />}
-    <Avatar className={classes.avatar} onClick={onAvatarClick}>{username}</Avatar>
+    <Link to="/profile" className={classes.link}>
+      <Avatar className={classes.avatar} onClick={onAvatarClick}>{username}</Avatar>
+    </Link>
   </React.Fragment>
 )
 
 export default compose(
-  withState('isClicked', 'setIsClicked', false),
-  withHandlers({
-    onAvatarClick: props => () => {
-      props.setIsClicked(true);
-    }
-  }),
-  onlyUpdateForKeys(['username', 'isClicked', 'id'])
-)(withStyles(styles)(UserNavMenu));
+  onlyUpdateForKeys(['username', 'id']),
+  withStyles(styles)
+)(UserNavMenu);

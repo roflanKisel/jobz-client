@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateCompanyForm from '../create-company-form/create-company-form';
+import CreateCompanyForm from '../../containers/create-company-form';
 
 const Companies = ({ match }) => (
   <React.Fragment>

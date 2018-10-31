@@ -42,17 +42,17 @@ const InfoPage = ({ classes }) => (
       <Paper className={classes.paper}>
         <AuthorInfo
           avatar={designerAvatar}
-          header="Our Main Designer"
+          header="Our Amazing Designer"
           description="Created main application concept and color palette"
         />
         <AuthorInfo
           avatar={mainDeveloperAvatar}
-          header="Our Main Developer"
+          header="Our Amazing Developer"
           description="The man who spent a thousand sleepless nights"
         />
         <AuthorInfo
           avatar={ceoAvatar}
-          header="Our Boss"
+          header="Our Amazing CEO"
           description="The man to whom we all obey and not transgress"
         />
       </Paper>
