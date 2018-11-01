@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { Button, Paper, Grid, withStyles, Typography } from '@material-ui/core';
+import { Button, Paper, Grid, withStyles, Typography, LinearProgress } from '@material-ui/core';
 import TextField from '../../../../components/text-field/text-field';
 import StepButtonsPaper from '../../../../components/step-buttons-paper/step-buttons-paper';
+import SuccessForm from '../../../../components/success-form/success-form';
 
 const styles = theme => ({
   root: {},
@@ -16,12 +17,15 @@ const styles = theme => ({
     width: '30%',
     [theme.breakpoints.only('xs')]: {
       width: '100%',
-    }
+    },
   },
   textArea: {
     width: '100%',
     marginTop: 10,
     marginBottom: 20,
+  },
+  progress: {
+    width: '100%',
   },
 });
 
@@ -31,12 +35,12 @@ class CreateCompanyForm extends PureComponent {
     address: '',
     phoneNumber: '',
     description: '',
-    companyNameError: false,
   };
 
   componentDidMount() {
-    const { dispatchSetTitle } = this.props;
+    const { dispatchSetTitle, dispatchClearState } = this.props;
 
+    dispatchClearState();
     dispatchSetTitle('Create company');
   }
 
@@ -44,71 +48,103 @@ class CreateCompanyForm extends PureComponent {
     this.setState({
       companyName: event.target.value,
     });
-  }
+  };
 
   onChangeAddress = event => {
     this.setState({
       address: event.target.value,
     });
-  }
+  };
 
   onChangePhoneNumber = event => {
     this.setState({
       phoneNumber: event.target.value,
     });
-  }
+  };
 
   onChangeDescription = event => {
     this.setState({
       description: event.target.value,
     });
-  }
+  };
+
+  onNextClick = () => {
+    const { dispatchCreateCompany } = this.props;
+    const { companyName, address, phoneNumber, description } = this.state;
+
+    dispatchCreateCompany({
+      companyName,
+      address,
+      phoneNumber,
+      description,
+    });
+  };
 
   render() {
-    const { classes } = this.props;
-    const { companyName, address, phoneNumber, description, companyNameError } = this.state;
+    const { classes, isLoading, isFailure, company } = this.props;
+    const {
+      companyName,
+      address,
+      phoneNumber,
+      description,
+    } = this.state;
 
     return (
       <Grid className={classes.root} container justify="center">
-        <Grid item xs={11} sm={9} md={7}>
-          <Paper className={classes.paper}>
-            <Typography gutterBottom variant="title">
-              Create company
-            </Typography>
-            <Grid container justify="space-between">
-              <TextField
-                className={classes.textField}
-                value={companyName}
-                label="Company Name"
-                error={companyNameError}
-                onChange={this.onChangeCompanyName}
-              />
-              <TextField
-                className={classes.textField}
-                value={address}
-                label="Address"
-                onChange={this.onChangeAddress}
-              />
-              <TextField
-                className={classes.textField}
-                value={phoneNumber}
-                label="Phone"
-                onChange={this.onChangePhoneNumber}
-              />
-            </Grid>
-            <Grid container>
-              <TextField className={classes.textArea} value={description} onChange={this.onChangeDescription} multiline rows={5} rowsMax={5} label="Description" />
-            </Grid>
-            <Button variant="contained" color="primary">
-              Upload image
-            </Button>
-          </Paper>
-          <StepButtonsPaper
-            className={classes.paper}
-            backLink="/"
-            nextLink="/"
-          />
-        </Grid>
+        {isLoading && <LinearProgress className={classes.progress} />}
+        {!company && (
+          <Grid item xs={11} sm={9} md={7}>
+            <Paper className={classes.paper}>
+              <Typography gutterBottom variant="title">
+                Create company
+              </Typography>
+              <Grid container justify="space-between">
+                <TextField
+                  className={classes.textField}
+                  value={companyName}
+                  label="Company Name"
+                  error={isFailure}
+                  onChange={this.onChangeCompanyName}
+                />
+                <TextField
+                  className={classes.textField}
+                  value={address}
+                  label="Address"
+                  onChange={this.onChangeAddress}
+                />
+                <TextField
+                  className={classes.textField}
+                  value={phoneNumber}
+                  label="Phone"
+                  onChange={this.onChangePhoneNumber}
+                />
+              </Grid>
+              <Grid container>
+                <TextField
+                  className={classes.textArea}
+                  value={description}
+                  onChange={this.onChangeDescription}
+                  multiline
+                  rows={5}
+                  rowsMax={5}
+                  label="Description"
+                />
+              </Grid>
+              <Button variant="contained" color="primary">
+                Upload image
+              </Button>
+            </Paper>
+            <StepButtonsPaper
+              className={classes.paper}
+              backLink="/"
+              nextLink="/"
+              onNextClick={this.onNextClick}
+            />
+          </Grid>
+        )}
+        {company && (
+          <SuccessForm text="Company was successfully created!"/>
+        )}
       </Grid>
     );
   }
