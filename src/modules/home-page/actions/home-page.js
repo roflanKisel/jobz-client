@@ -1,50 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../../../constants/config';
 import formatter from '../../../services/formatter';
-import {
-  HOME_COMPANIES_DATA_REQUEST,
-  HOME_COMPANIES_DATA_SUCCESS,
-  HOME_COMPANIES_DATA_FAILURE,
-  HOME_VACANCIES_DATA_REQUEST,
-  HOME_VACANCIES_DATA_SUCCESS,
-  HOME_VACANCIES_DATA_FAILURE,
-} from '../constants/home-page';
-import { NAVBAR_TITLE_SET } from '../../../constants/navbar';
-
-const companiesData = [
-  {
-    header: 'EPAM',
-    description:
-      'We can help your business transform. Our multi-disciplinary teams combine business expertise with design thinking, world-class engineering, modern operations practices and knowledge of leading tools and frameworks to optimize performance.',
-    img: 'https://careers.epam.by/etc/designs/epam-core/images/common/logo.png',
-    link: 'https://www.epam.com',
-    id: 1,
-  },
-  {
-    header: 'EPAM',
-    description:
-      'We can help your business transform. Our multi-disciplinary teams combine business expertise with design thinking, world-class engineering, modern operations practices and knowledge of leading tools and frameworks to optimize performance.',
-    img: 'https://careers.epam.by/etc/designs/epam-core/images/common/logo.png',
-    link: 'https://www.epam.com',
-    id: 2,
-  },
-  {
-    header: 'EPAM',
-    description:
-      'We can help your business transform. Our multi-disciplinary teams combine business expertise with design thinking, world-class engineering, modern operations practices and knowledge of leading tools and frameworks to optimize performance.',
-    img: 'https://careers.epam.by/etc/designs/epam-core/images/common/logo.png',
-    link: 'https://www.epam.com',
-    id: 3,
-  },
-  {
-    header: 'EPAM',
-    description:
-      'We can help your business transform. Our multi-disciplinary teams combine business expertise with design thinking, world-class engineering, modern operations practices and knowledge of leading tools and frameworks to optimize performance.',
-    img: 'https://careers.epam.by/etc/designs/epam-core/images/common/logo.png',
-    link: 'https://www.epam.com',
-    id: 4,
-  },
-];
+import * as homeActions from '../constants/home-page';
 
 const vacanciesData = [
   {
@@ -87,29 +44,32 @@ const vacanciesData = [
 
 const getFeaturedCompanies = () => dispatch => {
   dispatch({
-    type: HOME_COMPANIES_DATA_REQUEST,
+    type: homeActions.HOME_COMPANIES_DATA_REQUEST,
   });
 
-  axios.get(`${API_URL}/api/companies`)
+  axios
+    .get(`${API_URL}/api/companies`)
     .then(res => {
-      dispatch({ type: HOME_COMPANIES_DATA_SUCCESS, payload: formatter.formatCompaniesForCards(res.data) });
-    })
-    .catch(err => {
       dispatch({
-        type: HOME_COMPANIES_DATA_FAILURE,
+        type: homeActions.HOME_COMPANIES_DATA_SUCCESS,
+        payload: formatter.formatCompaniesForCards(res.data),
       });
-      console.err(err);
+    })
+    .catch(() => {
+      dispatch({
+        type: homeActions.HOME_COMPANIES_DATA_FAILURE,
+      });
     });
 };
 
 const getFeaturedVacancies = () => dispatch => {
   dispatch({
-    type: HOME_VACANCIES_DATA_REQUEST,
+    type: homeActions.HOME_VACANCIES_DATA_REQUEST,
   });
 
   setTimeout(() => {
     dispatch({
-      type: HOME_VACANCIES_DATA_SUCCESS,
+      type: homeActions.HOME_VACANCIES_DATA_SUCCESS,
       payload: vacanciesData,
     });
   }, 2000);
