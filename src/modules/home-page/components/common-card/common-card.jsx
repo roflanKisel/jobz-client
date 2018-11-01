@@ -22,12 +22,15 @@ const styles = {
   media: {
     height: 140,
   },
+  cardAction: {
+    width: '100%',
+  },
 };
 
 const CommonCard = ({ classes, header, description, img, link = '' }) => (
   <Grid item xs={12} sm={6} md={6} lg={3}>
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea className={classes.cardAction}>
         <CardMedia className={classes.media} image={img} title={header} />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">

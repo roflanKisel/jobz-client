@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { API_URL } from '../../../constants/config';
+import formatter from '../../../services/formatter';
 import {
   HOME_COMPANIES_DATA_REQUEST,
   HOME_COMPANIES_DATA_SUCCESS,
@@ -87,9 +90,16 @@ const getFeaturedCompanies = () => dispatch => {
     type: HOME_COMPANIES_DATA_REQUEST,
   });
 
-  setTimeout(() => {
-    dispatch({ type: HOME_COMPANIES_DATA_SUCCESS, payload: companiesData });
-  }, 2000);
+  axios.get(`${API_URL}/api/companies`)
+    .then(res => {
+      dispatch({ type: HOME_COMPANIES_DATA_SUCCESS, payload: formatter.formatCompaniesForCards(res.data) });
+    })
+    .catch(err => {
+      dispatch({
+        type: HOME_COMPANIES_DATA_FAILURE,
+      });
+      console.err(err);
+    });
 };
 
 const getFeaturedVacancies = () => dispatch => {
