@@ -49,7 +49,7 @@ const getFeaturedCompanies = () => dispatch => {
 
   axios
     .get(`${API_URL}/api/companies`)
-    .then(res => {
+    .then((res) => {
       dispatch({
         type: homeActions.HOME_COMPANIES_DATA_SUCCESS,
         payload: formatter.formatCompaniesForCards(res.data),
@@ -67,12 +67,19 @@ const getFeaturedVacancies = () => dispatch => {
     type: homeActions.HOME_VACANCIES_DATA_REQUEST,
   });
 
-  setTimeout(() => {
-    dispatch({
-      type: homeActions.HOME_VACANCIES_DATA_SUCCESS,
-      payload: vacanciesData,
+  axios
+    .get(`${API_URL}/api/vacancies`)
+    .then((res) => {
+      dispatch({
+        type: homeActions.HOME_VACANCIES_DATA_SUCCESS,
+        payload: formatter.formatVacanciesForCards(res.data),
+      });
+    })
+    .catch(() => {
+      dispatch({
+        type: homeActions.HOME_VACANCIES_DATA_FAILURE,
+      });
     });
-  }, 2000);
 };
 
 export { getFeaturedCompanies, getFeaturedVacancies };

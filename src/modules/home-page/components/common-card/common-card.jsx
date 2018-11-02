@@ -36,7 +36,7 @@ const CommonCard = ({ classes, header, description, img, link = '' }) => (
           <Typography gutterBottom variant="headline" component="h2">
             {header}
           </Typography>
-          <Typography component="p">{description}</Typography>
+          <Typography>{description}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

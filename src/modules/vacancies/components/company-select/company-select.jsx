@@ -14,7 +14,7 @@ const styles = {
   }
 };
 
-const CompanySelect = ({ companyName, onChange, classes }) => (
+const CompanySelect = ({ companyName, companies, onChange, classes }) => (
   <FormControl required className={classes.form}>
     <InputLabel htmlFor="company-name-required">Company name</InputLabel>
     <Select
@@ -28,9 +28,7 @@ const CompanySelect = ({ companyName, onChange, classes }) => (
       <MenuItem value="">
         <em>None</em>
       </MenuItem>
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
+      {companies.map(company => <MenuItem key={company.id} value={company.id}>{company.name}</MenuItem>)}
     </Select>
     <FormHelperText>Required</FormHelperText>
   </FormControl>

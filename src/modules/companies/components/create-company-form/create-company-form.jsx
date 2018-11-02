@@ -128,6 +128,8 @@ class CreateCompanyForm extends PureComponent {
       imageUrl,
     } = this.state;
 
+    // TODO: add spinner while image not loaded
+
     return (
       <Grid className={classes.root} container justify="center">
         {isLoading && <LinearProgress className={classes.progress} />}
@@ -186,7 +188,7 @@ class CreateCompanyForm extends PureComponent {
           </Grid>
         )}
         {company && (
-          <SuccessForm text="Company was successfully created!"/>
+          <SuccessForm text="Company was successfully created!" />
         )}
       </Grid>
     );

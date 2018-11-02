@@ -9,6 +9,10 @@ import UserNavMenu from '../user-nav-menu/user-nav-menu';
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    marginBottom: 64,
+    [theme.breakpoints.only('xs')]: {
+      marginBottom: 56,
+    },
   },
   flex: {
     flexGrow: 1,
@@ -48,7 +52,7 @@ class Navbar extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton color="inherit" className={classes.menuButton} onClick={this.onSideDrawerOpen}>
               <MenuIcon />
