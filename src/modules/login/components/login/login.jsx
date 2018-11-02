@@ -8,6 +8,7 @@ import {
   LinearProgress,
 } from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import TextField from '../../../../components/text-field/text-field';
 
 const styles = {
@@ -31,6 +32,14 @@ const styles = {
 };
 
 class Login extends PureComponent {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
+    dispatchSetTitle: PropTypes.func.isRequired,
+    dispatchSignIn: PropTypes.func.isRequired,
+  }
+
   state = {
     email: '',
     password: '',

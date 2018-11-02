@@ -2,6 +2,7 @@ import React from 'react';
 import { onlyUpdateForKeys, compose } from 'recompose';
 import { Avatar, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const styles = {
   link: {
@@ -22,6 +23,12 @@ const UserNavMenu = ({ classes, username, onAvatarClick }) => (
     </Link>
   </React.Fragment>
 )
+
+UserNavMenu.propTypes = {
+  classes: PropTypes.object.isRequired,
+  username: PropTypes.string.isRequired,
+  onAvatarClick: PropTypes.func,
+};
 
 export default compose(
   onlyUpdateForKeys(['username', 'id']),

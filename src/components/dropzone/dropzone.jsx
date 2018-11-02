@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDropzone from 'react-dropzone';
 import { withStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const styles = {
   dropzone: {
@@ -17,5 +18,10 @@ const Dropzone = ({ classes, onDrop }) => (
     <p>Drop an image or click to select a file upload</p>
   </ReactDropzone>
 );
+
+Dropzone.propTypes = {
+  classes: PropTypes.object.isRequired,
+  onDrop: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(Dropzone);

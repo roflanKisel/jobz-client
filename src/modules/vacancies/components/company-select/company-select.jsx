@@ -7,6 +7,7 @@ import {
   FormHelperText,
   withStyles,
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const styles = {
   form: {
@@ -33,5 +34,12 @@ const CompanySelect = ({ companyName, companies, onChange, classes }) => (
     <FormHelperText>Required</FormHelperText>
   </FormControl>
 );
+
+CompanySelect.propTypes = {
+  classes: PropTypes.object.isRequired,
+  companyName: PropTypes.string.isRequired,
+  companies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(CompanySelect);

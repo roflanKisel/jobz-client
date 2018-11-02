@@ -2,6 +2,7 @@ import React from 'react';
 import { Paper, Grid, Button, withStyles, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import OkIcon from '@material-ui/icons/CheckCircleOutline';
+import PropTypes from 'prop-types';
 
 const styles = {
   paper: {
@@ -39,5 +40,10 @@ const SuccessForm = ({ classes, text='' }) => (
     </Paper>
   </Grid>
 );
+
+SuccessForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  text: PropTypes.string,
+};
 
 export default withStyles(styles)(SuccessForm);

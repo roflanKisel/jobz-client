@@ -33,6 +33,7 @@ const PasswordInput = ({
 );
 
 PasswordInput.propTypes = {
+  className: PropTypes.string,
   password: PropTypes.string.isRequired,
   confirmedPassword: PropTypes.string.isRequired,
   onPasswordChange: PropTypes.func.isRequired,

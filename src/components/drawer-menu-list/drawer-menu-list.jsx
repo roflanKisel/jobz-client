@@ -1,5 +1,6 @@
 import React from 'react';
 import { List } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import DrawerMenuItem from '../drawer-menu-item/drawer-menu-item';
 
 const DrawerMenuList = ({ items }) => (
@@ -14,5 +15,13 @@ const DrawerMenuList = ({ items }) => (
     ))}
   </List>
 );
+
+DrawerMenuList.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    icon: PropTypes.object.isRequired,
+    text: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 export default DrawerMenuList;

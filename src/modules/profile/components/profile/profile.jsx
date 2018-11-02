@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Create';
 import { lifecycle } from 'recompose';
+import PropTypes from 'prop-types';
 import Tabs from '../tabs/tabs';
 
 const styles = theme => ({
@@ -102,5 +103,19 @@ const ProfileWithMounting = lifecycle({
     dispatchSetTitle('Profile');
   },
 })(Profile);
+
+ProfileWithMounting.propTypes = {
+  classes: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      action: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  userData: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }),
+  dispatchSetTitle: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(ProfileWithMounting);

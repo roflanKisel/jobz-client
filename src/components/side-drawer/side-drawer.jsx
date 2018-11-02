@@ -96,6 +96,7 @@ SideDrawer.propTypes = {
   onClose: PropTypes.func.isRequired,
   onOpen: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  onSignOutClick: PropTypes.func.isRequired,
 };
 
 export default onlyUpdateForKeys(['open'])(SideDrawer);

@@ -16,7 +16,7 @@ const signIn = data => dispatch => {
         dispatch({ type: loginActions.LOGIN_SIGN_IN_SUCCESS, payload: response.data.user });
       }, 2000);
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: loginActions.LOGIN_SIGN_IN_FAILURE });
     });
 };

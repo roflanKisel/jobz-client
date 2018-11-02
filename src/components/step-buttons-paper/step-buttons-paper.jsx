@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Paper, Button, Grid } from '@material-ui/core';
 
-const StepButtonsPaper = ({ className = '', backLink, nextLink, onNextClick }) => (
+const StepButtonsPaper = ({ className = '', backLink, onNextClick }) => (
   <Paper className={className}>
     <Grid container justify="space-between" className="button-container">
       <Button className="back-button" variant="contained" color="secondary" component={Link} to={backLink}>
@@ -20,7 +20,7 @@ const StepButtonsPaper = ({ className = '', backLink, nextLink, onNextClick }) =
 StepButtonsPaper.propTypes = {
   className: PropTypes.string,
   backLink: PropTypes.string.isRequired,
-  nextLink: PropTypes.string.isRequired,
+  onNextClick: PropTypes.func,
 };
 
 export default onlyUpdateForKeys(['backLink', 'nextLink'])(StepButtonsPaper);

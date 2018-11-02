@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import CommonCard from '../common-card/common-card';
 
-const styles = theme => ({
+const styles = {
   root: {
     marginTop: 15,
   },
@@ -20,7 +20,7 @@ const styles = theme => ({
   progress: {
     width: '100%',
   },
-});
+};
 
 const HomePage = ({ classes, companies, vacancies, isLoading }) => (
   <Grid container justify="center">
@@ -66,6 +66,7 @@ HomePage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   dispatchGetCompanies: PropTypes.func.isRequired,
   dispatchGetVacancies: PropTypes.func.isRequired,
+  dispatchSetTitle: PropTypes.func.isRequired,
 };
 
 const enhancedHomePage = withStyles(styles)(HomePage);

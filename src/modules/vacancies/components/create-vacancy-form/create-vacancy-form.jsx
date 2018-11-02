@@ -8,6 +8,7 @@ import {
   LinearProgress,
 } from '@material-ui/core';
 import request from 'superagent';
+import PropTypes from 'prop-types';
 import {
   CLOUDINARY_UPLOAD_URL,
   CLOUDINARY_UPLOAD_PRESET,
@@ -55,6 +56,17 @@ const styles = theme => ({
 });
 
 class CreateVacancyForm extends PureComponent {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    companies: PropTypes.arrayOf(PropTypes.object).isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    vacancy: PropTypes.object,
+    dispatchSetTitle: PropTypes.func.isRequired,
+    dispatchClearState: PropTypes.func.isRequired,
+    dispatchGetCompanies: PropTypes.func.isRequired,
+    dispatchCreateVacancy: PropTypes.func.isRequired,
+  }
+
   state = {
     companyName: '',
     employeePosition: '',

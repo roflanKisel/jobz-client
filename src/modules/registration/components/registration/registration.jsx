@@ -1,6 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Paper, Typography, withStyles, Button, LinearProgress } from '@material-ui/core';
+import {
+  Grid,
+  Paper,
+  Typography,
+  withStyles,
+  Button,
+  LinearProgress,
+} from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
 import InputArea from '../input-area/input-area';
 
@@ -26,6 +33,8 @@ const styles = theme => ({
 class Registration extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    dispatchRegistrationRequest: PropTypes.func.isRequired,
+    dispatchSetTitle: PropTypes.func.isRequired,
   };
 
   state = {
@@ -39,7 +48,7 @@ class Registration extends PureComponent {
   componentDidMount() {
     const { dispatchSetTitle } = this.props;
 
-    dispatchSetTitle('Sign Up')
+    dispatchSetTitle('Sign Up');
   }
 
   handleInputChange = name => event => {
@@ -87,7 +96,7 @@ class Registration extends PureComponent {
             />
           </Paper>
           <Paper className={classes.papers}>
-            {(!isLoading && isSuccess) && <Redirect to="/" />}
+            {!isLoading && isSuccess && <Redirect to="/" />}
             <Grid
               container
               justify="space-between"

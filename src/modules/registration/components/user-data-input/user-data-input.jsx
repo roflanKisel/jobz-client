@@ -32,6 +32,7 @@ const UserDataInput = ({
 );
 
 UserDataInput.propTypes = {
+  className: PropTypes.string,
   fullName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   onFullNameChange: PropTypes.func.isRequired,

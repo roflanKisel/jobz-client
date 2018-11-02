@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Button, Paper, Grid, withStyles, Typography, LinearProgress } from '@material-ui/core';
 import request from 'superagent';
+import PropTypes from 'prop-types';
 import { CLOUDINARY_UPLOAD_URL, CLOUDINARY_UPLOAD_PRESET } from '../../../../constants/config';
 import TextField from '../../../../components/text-field/text-field';
 import StepButtonsPaper from '../../../../components/step-buttons-paper/step-buttons-paper';
@@ -34,6 +35,12 @@ const styles = theme => ({
 });
 
 class CreateCompanyForm extends PureComponent {
+  static propTypes = {
+    dispatchCreateCompany: PropTypes.func.isRequired,
+    dispatchSetTitle: PropTypes.func.isRequired,
+    dispatchClearState: PropTypes.func.isRequired,
+  }
+
   state = {
     companyName: '',
     address: '',

@@ -30,6 +30,7 @@ const AuthorInfo = ({ classes, avatar = '', header = '', description = '' }) => 
 );
 
 AuthorInfo.propTypes = {
+  classes: PropTypes.object.isRequired,
   avatar: PropTypes.string,
   header: PropTypes.string,
   description: PropTypes.string,

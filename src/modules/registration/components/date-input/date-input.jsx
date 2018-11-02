@@ -18,6 +18,7 @@ const DateInput = ({ className = '', birthday, onBirthdayChange }) => (
 );
 
 DateInput.propTypes = {
+  className: PropTypes.string,
   birthday: PropTypes.string.isRequired,
   onBirthdayChange: PropTypes.func.isRequired,
 };

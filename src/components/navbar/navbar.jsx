@@ -24,6 +24,13 @@ const styles = theme => ({
 });
 
 class Navbar extends Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
+    userData: PropTypes.object,
+    title: PropTypes.string.isRequired,
+  }
+
   state = {
     isSideDrawerOpen: false,
   }
@@ -79,12 +86,5 @@ class Navbar extends Component {
     );
   }
 }
-
-Navbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-  userData: PropTypes.object,
-  title: PropTypes.string.isRequired,
-};
 
 export default withStyles(styles)(Navbar);

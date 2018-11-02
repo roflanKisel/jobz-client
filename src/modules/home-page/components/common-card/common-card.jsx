@@ -49,6 +49,7 @@ const CommonCard = ({ classes, header, description, img, link = '' }) => (
 );
 
 CommonCard.propTypes = {
+  classes: PropTypes.object.isRequired,
   header: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   img: PropTypes.string,
