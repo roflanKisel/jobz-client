@@ -29,7 +29,7 @@ const HomePage = ({ classes, companies, vacancies, isLoading }) => (
       <React.Fragment>
         <Grid className={classes.root} xs={11} item>
           <Typography variant="display3">Companies</Typography>
-          <Grid container spacing={16} justify="space-between">
+          <Grid container spacing={16}>
             {companies.map(company => (
               <CommonCard
                 key={company.id}
@@ -43,7 +43,7 @@ const HomePage = ({ classes, companies, vacancies, isLoading }) => (
         </Grid>
         <Grid className={classes.root} xs={11} item>
           <Typography variant="display3">Vacancies</Typography>
-          <Grid item xs={12} container spacing={16}>
+          <Grid container spacing={16}>
             {vacancies.map(vacancy => (
               <CommonCard
                 key={vacancy.id}

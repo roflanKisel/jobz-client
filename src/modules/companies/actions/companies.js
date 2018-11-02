@@ -10,6 +10,7 @@ const createCompany = (companyData) => (dispatch, getState) => {
     address: companyData.address,
     phone: companyData.phoneNumber,
     description: companyData.description,
+    imageUrl: companyData.imageUrl,
     userId: getState().user.userData.id,
   };
 

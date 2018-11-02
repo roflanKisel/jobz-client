@@ -20,7 +20,7 @@ const styles = {
     marginTop: 10,
   },
   media: {
-    height: 140,
+    height: 230,
   },
   cardAction: {
     width: '100%',

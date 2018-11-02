@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Button, Paper, Grid, withStyles, Typography, LinearProgress } from '@material-ui/core';
+import request from 'superagent';
+import { CLOUDINARY_UPLOAD_URL, CLOUDINARY_UPLOAD_PRESET } from '../../../../constants/config';
 import TextField from '../../../../components/text-field/text-field';
 import StepButtonsPaper from '../../../../components/step-buttons-paper/step-buttons-paper';
 import SuccessForm from '../../../../components/success-form/success-form';
+import Dropzone from '../../../../components/dropzone/dropzone';
+import CustomImage from '../../../../components/custom-image/custom-image';
 
 const styles = theme => ({
   root: {},
@@ -35,6 +39,7 @@ class CreateCompanyForm extends PureComponent {
     address: '',
     phoneNumber: '',
     description: '',
+    imageUrl: '',
   };
 
   componentDidMount() {
@@ -68,15 +73,48 @@ class CreateCompanyForm extends PureComponent {
     });
   };
 
+  handleImageUpload = file => {
+    const upload = request.post(CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        this.setState({
+          imageUrl: response.body.secure_url
+        });
+      }
+    });
+  };
+
+  onDropImage = files => {
+    this.setState({
+      imageUrl: files[0],
+    });
+
+    this.handleImageUpload(files[0]);
+  };
+
   onNextClick = () => {
     const { dispatchCreateCompany } = this.props;
-    const { companyName, address, phoneNumber, description } = this.state;
+    const { companyName, address, phoneNumber, description, imageUrl } = this.state;
 
     dispatchCreateCompany({
       companyName,
       address,
       phoneNumber,
       description,
+      imageUrl,
+    });
+  };
+
+  removeImage = () => {
+    this.setState({
+      imageUrl: '',
     });
   };
 
@@ -87,6 +125,7 @@ class CreateCompanyForm extends PureComponent {
       address,
       phoneNumber,
       description,
+      imageUrl,
     } = this.state;
 
     return (
@@ -129,10 +168,14 @@ class CreateCompanyForm extends PureComponent {
                   rowsMax={5}
                   label="Description"
                 />
+                {!imageUrl && <Dropzone onDrop={this.onDropImage} />}
+                {imageUrl &&
+                  <Grid container direction="column" alignItems="center" justify="center" spacing={8}>
+                    <CustomImage url={imageUrl} alt="company" />
+                    <Button variant="contained" color="secondary" onClick={this.removeImage}>Remove image</Button>
+                  </Grid>
+                }
               </Grid>
-              <Button variant="contained" color="primary">
-                Upload image
-              </Button>
             </Paper>
             <StepButtonsPaper
               className={classes.paper}
