@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
+import { AppBar, Typography, Tab, Tabs, withStyles } from '@material-ui/core';
+import VacancyItem from '../vacancy-item/vacancy-item';
 
 const TabContainer = ({ children }) => (
   <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -29,7 +26,7 @@ const styles = theme => ({
 class ScrollableTabsButtonAuto extends React.PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-  }
+  };
 
   state = {
     value: 0,
@@ -58,7 +55,11 @@ class ScrollableTabsButtonAuto extends React.PureComponent {
             <Tab label="Companies" />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer>Item One</TabContainer>}
+        {value === 0 && (
+          <TabContainer>
+            <VacancyItem />
+          </TabContainer>
+        )}
         {value === 1 && <TabContainer>Item Two</TabContainer>}
       </div>
     );

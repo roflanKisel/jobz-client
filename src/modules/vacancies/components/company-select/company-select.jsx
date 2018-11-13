@@ -9,11 +9,14 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const styles = {
+const styles = theme => ({
   form: {
     minWidth: '200px',
+    [theme.breakpoints.only('xs')]: {
+      width: '100%',
+    },
   }
-};
+});
 
 const CompanySelect = ({ companyName, companies, onChange, classes }) => (
   <FormControl required className={classes.form}>

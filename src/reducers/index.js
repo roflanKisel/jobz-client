@@ -5,6 +5,7 @@ import LoginReducer from '../modules/login/reducers/login';
 import NavbarReducer from './navbar';
 import CompaniesReducer from '../modules/companies/reducers/companies';
 import VacanciesReducer from '../modules/vacancies/reducers/vacancies';
+import ProfileReducer from '../modules/profile/reducers/profile';
 
 export default combineReducers({
   home: HomePageReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   navbar: NavbarReducer,
   companies: CompaniesReducer,
   vacancies: VacanciesReducer,
+  profile: ProfileReducer,
 });
