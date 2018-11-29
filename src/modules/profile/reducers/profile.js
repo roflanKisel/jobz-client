@@ -33,4 +33,4 @@ export default handleActions({
     ...INITIAL_STATE,
     isFailure: true,
   }),
-})
+}, INITIAL_STATE);
