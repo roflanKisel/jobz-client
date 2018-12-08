@@ -28,9 +28,9 @@ const getVacancies = () => (dispatch, getState) => {
     type: profileActions.PROFILE_VACANCIES_REQUEST,
   });
 
-  const { userId } = getState().user.userData;
+  const userId = getState().user.userData.id;
 
-  axios.get(`${API_URL}/api/users/${userId}/vacancies`)
+  axios.get(`${API_URL}/api/users/${userId}/vacancies/favorites`)
     .then((res) => {
       dispatch({
         type: profileActions.PROFILE_VACANCIES_SUCCESS,

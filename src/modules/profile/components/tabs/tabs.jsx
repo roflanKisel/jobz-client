@@ -37,7 +37,7 @@ class ScrollableTabsButtonAuto extends React.PureComponent {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, vacancies } = this.props;
     const { value } = this.state;
 
     return (
@@ -57,10 +57,10 @@ class ScrollableTabsButtonAuto extends React.PureComponent {
         </AppBar>
         {value === 0 && (
           <TabContainer>
-            <VacancyItem />
+            {vacancies.map((vacancy) => <VacancyItem key={vacancy.id} vacancy={vacancy}/>)}
           </TabContainer>
         )}
-        {value === 1 && <TabContainer>Item Two</TabContainer>}
+        {value === 1 && <TabContainer>Companies</TabContainer>}
       </div>
     );
   }

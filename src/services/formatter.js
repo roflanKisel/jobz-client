@@ -11,7 +11,7 @@ const formatVacanciesForCards = vacancies => vacancies.map(vacancy => ({
   header: `${vacancy.employeePosition} - ${vacancy.company.name}`,
   description: vacancy.description,
   img: vacancy.imageUrl || 'http://www.archer-soft.com/sites/default/files/Microsoft-dotNET-logo.jpg',
-  link: `/vacancies/${vacancy.id}`,
+  link: `/vacancies/get/${vacancy.id}`,
 }));
 
 export default {

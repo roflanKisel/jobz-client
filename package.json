@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack-dev-server --mode development --open",
     "test": "jest -u",
     "test:watch": "jest --watch",
     "build": "webpack --mode production",

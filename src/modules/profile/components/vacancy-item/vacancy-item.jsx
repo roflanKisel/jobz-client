@@ -11,10 +11,10 @@ const styles = {
   width: '100%',
 };
 
-const VacancyItem = () => (
+const VacancyItem = ({ vacancy }) => (
   <ExpansionPanel>
     <ExpansionPanelSummary>
-      <Typography>Vacancy 1</Typography>
+      <Typography>{vacancy.id}</Typography>
     </ExpansionPanelSummary>
     <ExpansionPanelDetails>
       Deatils of vacancy 1

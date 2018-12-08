@@ -7,7 +7,7 @@ import { createVacancy, clearState, getCompanies } from '../actions/vacancies';
 const mapStateToProps = state => ({
   isLoading: state.vacancies.isLoading,
   isFailure: state.vacancies.isFailure,
-  vacancy: state.vacancies.vacancy,
+  vacancy: state.vacancies.createdVacancy,
   companies: state.vacancies.companies,
 });
 

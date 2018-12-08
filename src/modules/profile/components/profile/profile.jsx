@@ -43,7 +43,7 @@ const styles = theme => ({
   },
 });
 
-const Profile = ({ classes, match, userData }) => (
+const Profile = ({ classes, match, userData, vacancies }) => (
   <React.Fragment>
     {match.params.action === 'edit' && <Redirect to="/" />}
     <Grid container justify="center">
@@ -54,43 +54,16 @@ const Profile = ({ classes, match, userData }) => (
               <Avatar className={classes.avatar}>{userData.name[0]}</Avatar>
             </Grid>
             <Grid item xs={5} sm={8} container justify="center">
-              <Grid container alignItems="flex-start" justify="center">
-                <Grid item xs={12} container justify="center">
+              <Grid container alignItems="center" justify="center">
+                <Grid item xs={12} container justify="center" alignItems="center" direction="column">
                   <Typography variant="headline">{userData.name.split(' ')[0]}</Typography>
-                </Grid>
-                <Grid item xs={12} container justify="center">
                   <Typography variant="caption">{userData.email}</Typography>
                 </Grid>
-              </Grid>
-              <Grid container alignItems="flex-end" justify="center">
-                <Hidden smDown>
-                  <Button
-                    className={classes.bottomButton}
-                    variant="contained"
-                    color="primary"
-                    size="medium"
-                  >
-                    View summary
-                  </Button>
-                  <Button
-                    className={classes.bottomButton}
-                    variant="contained"
-                    color="secondary"
-                    size="medium"
-                  >
-                    Edit profile
-                  </Button>
-                </Hidden>
-                <Hidden mdUp>
-                <Button variant="fab" color="secondary" aria-label="Edit" className={classes.button}>
-                  <EditIcon />
-                </Button>
-                </Hidden>
               </Grid>
             </Grid>
           </Grid>
         </Paper>
-        <Tabs />
+        <Tabs vacancies={vacancies} />
       </Grid>
     </Grid>
   </React.Fragment>
@@ -98,9 +71,10 @@ const Profile = ({ classes, match, userData }) => (
 
 const ProfileWithMounting = lifecycle({
   componentDidMount() {
-    const { dispatchSetTitle } = this.props;
+    const { dispatchSetTitle, dispatchGetVacancies } = this.props;
 
     dispatchSetTitle('Profile');
+    dispatchGetVacancies();
   },
 })(Profile);
 
