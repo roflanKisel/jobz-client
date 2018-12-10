@@ -10,6 +10,7 @@ import {
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextField from '../../../../components/text-field/text-field';
+import ValidationService from '../../../../services/validationService';
 
 const styles = {
   papers: {
@@ -43,6 +44,7 @@ class Login extends PureComponent {
   state = {
     email: '',
     password: '',
+    isEmailError: true,
   };
 
   componentDidMount() {
@@ -54,6 +56,7 @@ class Login extends PureComponent {
   onChangeEmail = event => {
     this.setState({
       email: event.target.value,
+      isEmailError: !ValidationService.isValidEmail(event.target.value),
     });
   };
 
@@ -75,7 +78,7 @@ class Login extends PureComponent {
 
   render() {
     const { classes, isLoading, isLoggedIn } = this.props;
-    const { email, password } = this.state;
+    const { email, password, isEmailError } = this.state;
 
     return (
       <Grid container justify="center">
@@ -90,6 +93,7 @@ class Login extends PureComponent {
                 onChange={this.onChangeEmail}
                 type="email"
                 label="E-mail"
+                error={isEmailError}
               />
               <TextField
                 className={classes.textFields}

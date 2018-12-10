@@ -8,6 +8,7 @@ const UserDataInput = ({
   className='',
   fullName,
   email,
+  errors,
   onFullNameChange,
   onEmailChange,
 }) => (
@@ -19,6 +20,7 @@ const UserDataInput = ({
       type="text"
       value={fullName}
       onChange={onFullNameChange}
+      error={errors.name}
     />
     <TextField
       className={className}
@@ -26,6 +28,7 @@ const UserDataInput = ({
       label="E-mail"
       type="email"
       value={email}
+      error={errors.email}
       onChange={onEmailChange}
     />
   </Grid>

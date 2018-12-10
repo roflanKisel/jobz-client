@@ -22,8 +22,6 @@ const createVacancy = (vacancyData) => dispatch => {
 const getVacancy = (id) => dispatch => {
   dispatch({ type: actions.VACANCY_REQUEST });
 
-  console.log(id);
-
   axios.get(`${API_URL}/api/vacancies/${id}`)
     .then(res => {
       dispatch({

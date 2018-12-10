@@ -11,6 +11,8 @@ import {
 import { Link, Redirect } from 'react-router-dom';
 import InputArea from '../input-area/input-area';
 
+import validationService from '../../../../services/validationService';
+
 const styles = theme => ({
   papers: {
     padding: 20,
@@ -43,6 +45,11 @@ class Registration extends PureComponent {
     password: '',
     confirmedPassword: '',
     birthday: '1999-06-20',
+    errors: {
+      email: true,
+      name: true,
+      password: true,
+    },
   };
 
   componentDidMount() {
@@ -55,6 +62,26 @@ class Registration extends PureComponent {
     this.setState({
       [name]: event.target.value,
     });
+
+    const currentError = {};
+
+    switch (name) {
+    case 'email':
+      currentError.email = !validationService.isValidEmail(event.target.value);
+      break;
+    case 'name':
+      currentError.name = !validationService.isValidFullname(event.target.value);
+      break;
+    case 'password':
+      currentError.password = !validationService.isValidPassword(event.target.value);
+      break;
+    default:
+      break;
+    }
+
+    this.setState((prev) => ({
+      errors: { ...prev.errors, ...currentError }
+    }));
   };
 
   onSendData = () => {
@@ -70,7 +97,7 @@ class Registration extends PureComponent {
   };
 
   render() {
-    const { name, email, password, confirmedPassword, birthday } = this.state;
+    const { name, email, password, confirmedPassword, birthday, errors } = this.state;
     const { classes, isLoading, isSuccess } = this.props;
 
     return (
@@ -93,6 +120,7 @@ class Registration extends PureComponent {
                 'confirmedPassword'
               )}
               onBirthdayChange={this.handleInputChange('birthday')}
+              errors={errors}
             />
           </Paper>
           <Paper className={classes.papers}>
@@ -117,12 +145,11 @@ class Registration extends PureComponent {
                 color="primary"
                 onClick={this.onSendData}
                 disabled={
-                  !(
-                    name &&
-                    email &&
-                    password &&
-                    birthday &&
-                    password === confirmedPassword
+                  (
+                    errors.email ||
+                    errors.name ||
+                    errors.password ||
+                    !(password === confirmedPassword)
                   )
                 }
               >

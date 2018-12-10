@@ -18,17 +18,20 @@ const InputArea = ({
   onPasswordChange,
   onConfirmedPasswordChange,
   onBirthdayChange,
+  errors,
 }) => (
   <Grid item container justify="flex-start" xs={12}>
     <UserDataInput
       className={className}
       fullName={fullName}
       email={email}
+      errors={errors}
       onFullNameChange={onFullNameChange}
       onEmailChange={onEmailChange}
     />
     <PasswordInput
       className={className}
+      errors={errors}
       password={password}
       confirmedPassword={confirmedPassword}
       onPasswordChange={onPasswordChange}

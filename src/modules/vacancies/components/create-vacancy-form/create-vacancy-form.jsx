@@ -20,6 +20,8 @@ import Dropzone from '../../../../components/dropzone/dropzone';
 import CustomImage from '../../../../components/custom-image/custom-image';
 import SuccessForm from '../../../../components/success-form/success-form';
 
+import ValidationService from '../../../../services/validationService';
+
 const styles = theme => ({
   root: {},
   paper: {
@@ -73,6 +75,11 @@ class CreateVacancyForm extends PureComponent {
     estimatedSalary: '',
     description: '',
     imageUrl: '',
+    errors: {
+      employeePosition: true,
+      estimatedSalary: true,
+      description: true,
+    },
   };
 
   componentDidMount() {
@@ -94,21 +101,30 @@ class CreateVacancyForm extends PureComponent {
   };
 
   onChangeEmployeePosition = event => {
-    this.setState({
-      employeePosition: event.target.value,
-    });
+    const text = event.target.value;
+
+    this.setState((prev) => ({
+      employeePosition: text,
+      errors: {...prev.errors, employeePosition: !ValidationService.isValidEmployeePosition(text)},
+    }));
   };
 
   onChangeEstimatedSalary = event => {
-    this.setState({
-      estimatedSalary: event.target.value,
-    });
+    const text = event.target.value;
+
+    this.setState((prev) => ({
+      estimatedSalary: text,
+      errors: {...prev.errors, estimatedSalary: !ValidationService.isValidCash(text)},
+    }));
   };
 
   onChangeDescription = event => {
-    this.setState({
-      description: event.target.value,
-    });
+    const text = event.target.value;
+
+    this.setState((prev) => ({
+      description: text,
+      errors: {...prev.errors, description: !ValidationService.isValidDescription(text)},
+    }));
   };
 
   handleImageUpload = file => {
@@ -171,6 +187,7 @@ class CreateVacancyForm extends PureComponent {
       estimatedSalary,
       description,
       imageUrl,
+      errors,
     } = this.state;
 
     // TODO: add spinner while image not loaded
@@ -196,12 +213,14 @@ class CreateVacancyForm extends PureComponent {
                   className={classes.textField}
                   value={employeePosition}
                   label="Employee position"
+                  error={errors.employeePosition}
                   onChange={this.onChangeEmployeePosition}
                 />
                 <TextField
                   className={classes.additonalTextField}
                   value={estimatedSalary}
                   label="Estimated Salary"
+                  error={errors.estimatedSalary}
                   onChange={this.onChangeEstimatedSalary}
                 />
               </Grid>
@@ -213,6 +232,7 @@ class CreateVacancyForm extends PureComponent {
                   multiline
                   rows={5}
                   rowsMax={5}
+                  error={errors.description}
                   label="Description"
                 />
                 {!imageUrl && <Dropzone onDrop={this.onDropImage} />}
@@ -241,6 +261,9 @@ class CreateVacancyForm extends PureComponent {
               backLink="/"
               nextLink="/"
               onNextClick={this.onNextClick}
+              disabled={
+                errors.description || errors.employeePosition || errors.estimatedSalary
+              }
             />
           </Grid>
         )}

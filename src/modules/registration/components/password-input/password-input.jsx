@@ -9,6 +9,7 @@ const PasswordInput = ({
   password,
   confirmedPassword,
   onPasswordChange,
+  errors,
   onConfirmedPasswordChange,
 }) => (
   <Grid item xs={12} container justify="space-between">
@@ -19,6 +20,7 @@ const PasswordInput = ({
       type="password"
       value={password}
       onChange={onPasswordChange}
+      error={errors.password}
     />
     <TextField
       className={className}

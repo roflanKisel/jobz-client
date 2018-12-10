@@ -8,6 +8,7 @@ import StepButtonsPaper from '../../../../components/step-buttons-paper/step-but
 import SuccessForm from '../../../../components/success-form/success-form';
 import Dropzone from '../../../../components/dropzone/dropzone';
 import CustomImage from '../../../../components/custom-image/custom-image';
+import ValidationService from '../../../../services/validationService';
 
 const styles = theme => ({
   root: {},
@@ -47,6 +48,12 @@ class CreateCompanyForm extends PureComponent {
     phoneNumber: '',
     description: '',
     imageUrl: '',
+    errors: {
+      companyName: true,
+      address: true,
+      phoneNumber: true,
+      description: true,
+    },
   };
 
   componentDidMount() {
@@ -57,27 +64,43 @@ class CreateCompanyForm extends PureComponent {
   }
 
   onChangeCompanyName = event => {
-    this.setState({
-      companyName: event.target.value,
-    });
+    const text = event.target.value;
+    const { dispatchClearState } = this.props;
+
+    dispatchClearState();
+
+    this.setState((prev) => ({
+      companyName: text,
+      
+      errors: {...prev.errors, companyName: !ValidationService.isValidCompanyName(text)},
+    }));
   };
 
   onChangeAddress = event => {
-    this.setState({
-      address: event.target.value,
-    });
+    const text = event.target.value;
+
+    this.setState((prev) => ({
+      address: text,
+      errors: {...prev.errors, address: !ValidationService.isValidAddress(text)},
+    }));
   };
 
   onChangePhoneNumber = event => {
-    this.setState({
-      phoneNumber: event.target.value,
-    });
+    const text = event.target.value;
+
+    this.setState((prev) => ({
+      phoneNumber: text,
+      errors: {...prev.errors, phoneNumber: !ValidationService.isValidPhoneNumber(text)},
+    }));
   };
 
   onChangeDescription = event => {
-    this.setState({
-      description: event.target.value,
-    });
+    const text = event.target.value;
+
+    this.setState((prev) => ({
+      description: text,
+      errors: {...prev.errors, description: !ValidationService.isValidDescription(text)},
+    }));
   };
 
   handleImageUpload = file => {
@@ -133,9 +156,12 @@ class CreateCompanyForm extends PureComponent {
       phoneNumber,
       description,
       imageUrl,
+      errors,
     } = this.state;
 
     // TODO: add spinner while image not loaded
+
+    console.log(errors.address || errors.companyName || errors.description || errors.phoneNumber);
 
     return (
       <Grid className={classes.root} container justify="center">
@@ -151,19 +177,21 @@ class CreateCompanyForm extends PureComponent {
                   className={classes.textField}
                   value={companyName}
                   label="Company Name"
-                  error={isFailure}
+                  error={isFailure || errors.companyName}
                   onChange={this.onChangeCompanyName}
                 />
                 <TextField
                   className={classes.textField}
                   value={address}
                   label="Address"
+                  error={errors.address}
                   onChange={this.onChangeAddress}
                 />
                 <TextField
                   className={classes.textField}
                   value={phoneNumber}
                   label="Phone"
+                  error={errors.phoneNumber}
                   onChange={this.onChangePhoneNumber}
                 />
               </Grid>
@@ -171,6 +199,7 @@ class CreateCompanyForm extends PureComponent {
                 <TextField
                   className={classes.textArea}
                   value={description}
+                  error={errors.description}
                   onChange={this.onChangeDescription}
                   multiline
                   rows={5}
@@ -191,6 +220,9 @@ class CreateCompanyForm extends PureComponent {
               backLink="/"
               nextLink="/"
               onNextClick={this.onNextClick}
+              disabled={
+                errors.address || errors.companyName || errors.description || errors.phoneNumber
+              }
             />
           </Grid>
         )}
