@@ -44,7 +44,23 @@ const getVacancies = () => (dispatch, getState) => {
     });
 };
 
+const removeVacancy = (vacancyId) => (dispatch, getState) => {
+  const userId = getState().user.userData.id;
+
+  axios.delete(`${API_URL}/api/users/${userId}/vacancies/favorites`, { params: { vacancyId } })
+    .then(() => {
+      dispatch({
+        type: profileActions.PROFILE_REMOVE_VACANCY_SUCCESS,
+      });
+
+      setTimeout(() => {
+        getVacancies()(dispatch, getState);
+      }, 700);
+    });
+};
+
 export {
   getCompanies,
   getVacancies,
+  removeVacancy,
 };

@@ -8,6 +8,7 @@ import {
   LinearProgress,
 } from '@material-ui/core';
 import CommonCard from '../common-card/common-card';
+import CompanyCard from '../company-card/company-card';
 
 const styles = {
   root: {
@@ -31,7 +32,7 @@ const HomePage = ({ classes, companies, vacancies, isLoading }) => (
           <Typography variant="display3">Companies</Typography>
           <Grid container spacing={16}>
             {companies.map(company => (
-              <CommonCard
+              <CompanyCard
                 key={company.id}
                 header={company.header}
                 description={company.description}
