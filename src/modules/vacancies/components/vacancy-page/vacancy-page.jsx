@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Redirect} from 'react-router-dom';
 import {withStyles, Paper, Grid, LinearProgress, Typography, Button} from '@material-ui/core';
 
 const styles = {
@@ -27,20 +28,11 @@ const styles = {
     position: 'relative',
   },
   companyInfo: {
-    padding: '16px 0px 16px 0px',
+    padding: '16px 0px 0px 0px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    width: '100%',
-    heigth: '100%',
-
-    backgroundColor: 'rgba(172, 180, 193, 0.8)',
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
   },
   vacancyInfo: {
     display: 'flex',
@@ -72,9 +64,15 @@ class VacancyPage extends React.Component {
   }
 
   render() {
-    const {vacancy, isLoading, classes} = this.props;
+    const {vacancy, isLoading, favoriteSuccess, classes} = this.props;
 
-    console.log(vacancy);
+    if (favoriteSuccess) {
+      const { dispatchClearFavoriteState } = this.props;
+
+      dispatchClearFavoriteState();
+
+      return <Redirect to="/" />;
+    }
 
     return (
       <Grid container justify="center">
@@ -87,10 +85,10 @@ class VacancyPage extends React.Component {
                   <div>
                     <img className={classes.previewImage} src={vacancy.company.imageUrl} alt="" />
                   </div>
-                  <div className={classes.companyInfo}>
-                    <Typography color="primary" variant="h2">{vacancy.company.name}</Typography>
-                    <Typography color="primary" variant="body1">Phone: {vacancy.company.phone}</Typography>
-                  </div>
+                </div>
+                <div className={classes.companyInfo}>
+                  <Typography color="primary" variant="h2">{vacancy.company.name}</Typography>
+                  <Typography color="primary" variant="body1">Phone: {vacancy.company.phone}</Typography>
                 </div>
                 <div className={classes.vacancyInfo}>
                   <Typography variant="body2">Vacancy: {vacancy.employeePosition}</Typography>

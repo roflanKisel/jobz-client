@@ -54,7 +54,7 @@ class Navbar extends Component {
   }
 
   render() {
-    const { classes, isLoggedIn, userData, title } = this.props;
+    const { classes, isLoggedIn, userData, title, userRole } = this.props;
     const { isSideDrawerOpen } = this.state;
 
     return (
@@ -79,6 +79,7 @@ class Navbar extends Component {
             onClose={this.onSideDrawerClose}
             onOpen={this.onSideDrawerOpen}
             isLoggedIn={isLoggedIn}
+            userRole={userRole}
             onSignOutClick={this.onSignOutClick}
           />
         </AppBar>

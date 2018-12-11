@@ -57,7 +57,7 @@ const manipulatingItems = [
   },
 ];
 
-const SideDrawer = ({ open, onClose, onOpen, isLoggedIn, onSignOutClick }) => (
+const SideDrawer = ({ open, onClose, onOpen, isLoggedIn, userRole, onSignOutClick }) => (
   <SwipeableDrawer
     disableBackdropTransition={!iOS}
     disableDiscovery={iOS}
@@ -68,7 +68,7 @@ const SideDrawer = ({ open, onClose, onOpen, isLoggedIn, onSignOutClick }) => (
   >
     <div tabIndex={0} role="button" onClick={onClose} onKeyDown={onClose}>
       <DrawerMenuList items={mainItems} />
-      {isLoggedIn && (
+      {isLoggedIn && userRole === 'admin' && (
         <React.Fragment>
           <Divider />
           <DrawerMenuList items={manipulatingItems} />

@@ -82,10 +82,17 @@ const addFavoriteVacancy = (vacancyId) => (dispatch, getState) => {
     });
 };
 
+const clearFavoriteState = () => dispatch => {
+  dispatch({
+    type: actions.VACANCY_FAVORITE_CLEAR_STATE
+  });
+};
+
 export {
   createVacancy,
   getCompanies,
   getVacancy,
   clearState,
   addFavoriteVacancy,
+  clearFavoriteState,
 };

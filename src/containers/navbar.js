@@ -6,6 +6,7 @@ import Navbar from '../components/navbar/navbar';
 const mapStateToProps = state => ({
   userData: state.user.userData,
   isLoggedIn: state.user.isLoggedIn,
+  userRole: state.user.userData && state.user.userData.role || null,
   title: state.navbar.title,
 });
 

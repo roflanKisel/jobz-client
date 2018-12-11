@@ -8,6 +8,8 @@ const INITIAL_STATE = {
   createdVacancy: null,
   companies: [],
   isCompaniesLoadFailure: false,
+  favoriteSuccess: false,
+  favoriteFailure: false,
 };
 
 export default handleActions({
@@ -46,5 +48,12 @@ export default handleActions({
     ...INITIAL_STATE,
     isLoading: false,
     isFailure: true,
+  }),
+  [actions.VACANCY_FAVORITE_ADD_SUCCESS]: () => ({
+    ...INITIAL_STATE,
+    favoriteSuccess: true,
+  }),
+  [actions.VACANCY_FAVORITE_CLEAR_STATE]: () => ({
+    ...INITIAL_STATE,
   }),
 }, INITIAL_STATE);
